@@ -1,0 +1,1 @@
+from tagifai import predict

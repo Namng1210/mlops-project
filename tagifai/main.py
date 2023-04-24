@@ -40,9 +40,7 @@ def etl_data():
 
 @app.command()
 def train_model(
-    args_fp: str = "config/args.json",
-    experiment_name: str = "baselines",
-    run_name: str = "sgd"
+    args_fp: str = "config/args.json", experiment_name: str = "baselines", run_name: str = "sgd"
 ) -> None:
     """Train a model given arguments"""
     # Load labeled data
@@ -79,9 +77,7 @@ def train_model(
 
 @app.command()
 def optimize(
-    args_fp: str = "config/args.json",
-    study_name: str = "optimization",
-    num_trials: int = 20
+    args_fp: str = "config/args.json", study_name: str = "optimization", num_trials: int = 20
 ) -> None:
     """Optimize hyperparameters."""
     # Load labeled data
@@ -159,11 +155,11 @@ if __name__ == "__main__":
 
 # if __name__ == "__main__":
 #     etl_data()
-    # args_fp = Path(config.CONFIG_DIR, "args.json")
-    # # train_model(args_fp, experiment_name="baselines", run_name="sgd")
-    # # optimize(args_fp, study_name="optimization", num_trials=20)
+# args_fp = Path(config.CONFIG_DIR, "args.json")
+# # train_model(args_fp, experiment_name="baselines", run_name="sgd")
+# # optimize(args_fp, study_name="optimization", num_trials=20)
 
-    # # Run inference
-    # text = "Hello we will talk about the impact of transformer on chat GPT"
-    # run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
-    # predict_tag(text, run_id)
+# # Run inference
+# text = "Hello we will talk about the impact of transformer on chat GPT"
+# run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
+# predict_tag(text, run_id)

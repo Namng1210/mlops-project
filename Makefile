@@ -10,7 +10,7 @@ greeting:
 
 
 # Help
-.PHONY: help 
+.PHONY: help
 help:
 	@echo "Commands: "
 	@echo "venv : creates a virtual environment name venv."
@@ -27,7 +27,7 @@ style:
 # Clean
 .PHONY: clean
 clean: style
-	find . -type f -name "*.DS_Store" -ls - delete
+	find . -type f -name "*.DS_Store" -ls -delete
 	find . | grep -E "(__pycache__|\.pyc|\.pyo)" | xargs rm -rf
 	find . | grep -E ".pytest_cache" | xargs rm -rf
 	find . | grep -E ".ipynb_checkpoints" | xargs rm -rf
@@ -35,7 +35,7 @@ clean: style
 	rm -f .coverage
 
 # Test
-.PHONY: test 
+.PHONY: test
 test:
 	pytest -m "not training"
 	cd tests && great_expectations checkpoint run projects
@@ -49,3 +49,5 @@ venv :
 	source venv/bin/activate && \
 	python3 -m pip install pip setuptools wheel && \
 	python3 -m pip install -e .
+	pre-commit install && \
+    pre-commit autoupdate

@@ -1,6 +1,6 @@
-from food.fruits import is_crisp
 import pytest
 
+from food.fruits import is_crisp
 
 # def test_is_crisp():
 #     assert is_crisp("apple")
@@ -10,12 +10,12 @@ import pytest
 #         is_crisp(fruit=None)
 
 
-class Fruit(object):
+class Fruit:
     def __init__(self, name):
         self.name = name
 
 
-class TestFruit(object):
+class TestFruit:
     @classmethod
     def setup_class(cls):
         """Set up the state for any class instance."""
@@ -37,24 +37,12 @@ class TestFruit(object):
         assert self.fruit.name == "apple"
 
 
-@pytest.mark.parametrize(
-    "fruit, crisp",
-    [
-        ("apple", True),
-        ("Apple", True),
-        ("orange", False)
-    ]
-)
+@pytest.mark.parametrize("fruit, crisp", [("apple", True), ("Apple", True), ("orange", False)])
 def test_is_crisp_parametize(fruit, crisp):
     assert is_crisp(fruit=fruit) == crisp
 
 
-@pytest.mark.parametrize(
-    "fruit, crisp",
-    [
-        (None, ValueError)
-    ]
-)
+@pytest.mark.parametrize("fruit, crisp", [(None, ValueError)])
 def test_is_crisp_exception(fruit, crisp):
     with pytest.raises(ValueError):
         assert is_crisp(fruit=fruit) == crisp

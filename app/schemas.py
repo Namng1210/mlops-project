@@ -1,4 +1,5 @@
 from typing import List
+
 from fastapi import Query
 from pydantic import BaseModel, validator
 
@@ -21,7 +22,7 @@ class PredictPayload(BaseModel):
             "example": {
                 "texts": [
                     {"text": "Transfer learning with transformers for text classification"},
-                    {"text": "Cat detection is a necessary task for our company"}
+                    {"text": "Cat detection is a necessary task for our company"},
                 ]
             }
         }

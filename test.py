@@ -1,7 +1,6 @@
-from tagifai import evaluate
 import numpy as np
-import logging
-import sys
+
+from tagifai import evaluate
 
 # logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 

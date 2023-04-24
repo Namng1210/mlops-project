@@ -1,13 +1,15 @@
-from fastapi import FastAPI, Request
 from datetime import datetime
 from functools import wraps
-from typing import Dict
 from http import HTTPStatus
 from pathlib import Path
+from typing import Dict
+
+from fastapi import FastAPI, Request
+
+from app.schemas import PredictPayload
 from config import config
 from config.config import logger
 from tagifai import main, predict
-from app.schemas import PredictPayload
 
 # Define application
 app = FastAPI(
@@ -19,6 +21,7 @@ app = FastAPI(
 
 def construct_response(f):
     """Construct a JSON response for an endpoint"""
+
     @wraps(f)
     def wrap(request: Request, *args, **kwargs) -> Dict:
         results = f(request, *args, **kwargs)
@@ -34,6 +37,7 @@ def construct_response(f):
             response["data"] = results["data"]
 
         return response
+
     return wrap
 
 
@@ -49,11 +53,7 @@ def load_artifacts():
 @construct_response
 def _index(request: Request) -> Dict:
     """Health Check"""
-    response = {
-        "message": HTTPStatus.OK.phrase,
-        "status-code": HTTPStatus.OK,
-        "data": {}
-    }
+    response = {"message": HTTPStatus.OK.phrase, "status-code": HTTPStatus.OK, "data": {}}
     return response
 
 
@@ -64,11 +64,7 @@ def _performance(request: Request, filter: str = None) -> Dict:
     performance = artifacts["performance"]
     data = {"performance": performance.get(filter, performance)}
     print(filter)
-    response = {
-        "message": HTTPStatus.OK.phrase,
-        "status-code": HTTPStatus.OK,
-        "data": data
-    }
+    response = {"message": HTTPStatus.OK.phrase, "status-code": HTTPStatus.OK, "data": data}
     return response
 
 
@@ -79,9 +75,7 @@ def _arg(request: Request, arg: str) -> Dict:
     response = {
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
-        "data": {
-            arg: vars(artifacts["args"]).get(arg, "")
-        }
+        "data": {arg: vars(artifacts["args"]).get(arg, "")},
     }
     return response
 
@@ -93,7 +87,7 @@ def _args(request: Request) -> Dict:
     response = {
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
-        "data": {"args": vars(artifacts["args"])}
+        "data": {"args": vars(artifacts["args"])},
     }
 
     return response
@@ -108,6 +102,6 @@ def _predict(request: Request, payload: PredictPayload) -> Dict:
     response = {
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
-        "data": {"predictions": predictions}
+        "data": {"predictions": predictions},
     }
     return response

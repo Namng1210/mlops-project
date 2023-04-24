@@ -1,1 +1,1 @@
-from tagifai import predict
+# from tagifai import predict

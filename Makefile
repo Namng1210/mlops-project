@@ -43,6 +43,14 @@ test:
 	cd tests && great_expectations checkpoint run labeled_projects
 
 
+# DVC
+.PHONY: DVC
+dvc :
+	dvc add data/labeled_projects.csv
+	dvc add data/projects.csv
+	dvc add data/tags.csv
+	dvc push
+
 # Environment
 venv :
 	python3 -m venv venv

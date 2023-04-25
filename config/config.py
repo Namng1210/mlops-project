@@ -267,3 +267,7 @@ STOPWORDS = [
     "wouldn",
     "wouldn't",
 ]
+
+
+BLOB_STORE = Path(STORES_DIR, "blob")
+BLOB_STORE.mkdir(parents=True, exist_ok=True)
